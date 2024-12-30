@@ -58,8 +58,16 @@ class Play(models.Model):
 
 
 class Performance(models.Model):
-    play = models.ForeignKey(Play, on_delete=models.CASCADE, related_name="performances")
-    theatre_hall = models.ForeignKey(TheatreHall, on_delete=models.CASCADE, related_name="performances")
+    play = models.ForeignKey(
+        Play,
+        on_delete=models.CASCADE,
+        related_name="performances"
+    )
+    theatre_hall = models.ForeignKey(
+        TheatreHall,
+        on_delete=models.CASCADE,
+        related_name="performances"
+    )
     show_time = models.DateTimeField()
 
     def __str__(self):
@@ -82,10 +90,17 @@ class Reservation(models.Model):
 class Ticket(models.Model):
     row = models.IntegerField()
     seat = models.IntegerField()
-    performance = models.ForeignKey(Performance,on_delete=models.CASCADE, related_name="tickets")
-    reservation = models.ForeignKey(Reservation, on_delete=models.CASCADE, related_name="tickets")
+    performance = models.ForeignKey(
+        Performance,
+        on_delete=models.CASCADE,
+        related_name="tickets"
+    )
+    reservation = models.ForeignKey(
+        Reservation,
+        on_delete=models.CASCADE,
+        related_name="tickets"
+    )
 
-    #TODO: add validation as Denis said
     @staticmethod
     def validate_ticket(row, seat, theatre_hall, error_to_raise):
         for ticket_attr_value, ticket_attr_name, theatre_hall_attr_name in [
@@ -129,4 +144,3 @@ class Ticket(models.Model):
 
     def __str__(self):
         return f"{str(self.performance)} (row: {self.row}, seat: {self.seat})"
-

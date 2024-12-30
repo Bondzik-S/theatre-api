@@ -1,14 +1,25 @@
 from datetime import datetime
-
 from django.db.models import F, Count
 from drf_spectacular.utils import extend_schema, OpenApiParameter
 from rest_framework import mixins, viewsets, status
 from rest_framework.decorators import action
-from rest_framework.permissions import IsAdminUser, IsAuthenticatedOrReadOnly, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
+from rest_framework.permissions import (
+    IsAdminUser,
+    IsAuthenticatedOrReadOnly,
+    IsAuthenticated
+)
 
-from theatre.models import Genre, Actor, TheatreHall, Play, Performance, Reservation
+from theatre.models import (
+    Genre,
+    Actor,
+    TheatreHall,
+    Play,
+    Performance,
+    Reservation
+)
+
 from theatre.serializers import (
     GenreSerializer,
     ActorSerializer,
@@ -201,7 +212,7 @@ class ReservationViewSet(
 
     def get_serializer_class(self):
         if self.action == "list":
-            return  ReservationListSerializer
+            return ReservationListSerializer
         return ReservationSerializer
 
     def perform_create(self, serializer):
