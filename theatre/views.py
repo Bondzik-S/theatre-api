@@ -35,7 +35,6 @@ from theatre.serializers import (
 )
 
 
-# TODO: add permission classes everywhere
 class GenreViewSet(
     mixins.CreateModelMixin,
     mixins.ListModelMixin,
